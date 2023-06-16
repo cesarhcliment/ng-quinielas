@@ -1,0 +1,35 @@
+<!-- {{ equipos | json }} -->
+
+<div class="container">
+    <div class="text-center mt-4">
+        <h2>Equipos</h2>
+    </div>
+
+    <div *ngIf="!errorAPI">
+      <div class="d-grid">
+        <a class="btn btn-success btn-sm ms-auto" routerLink="/equipos/form">Nuevo</a>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Opciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let equipo of equipos">
+            <th scope="row">{{ equipo.id }}</th>
+            <td>{{ equipo.nombre }} </td>
+            <td>
+              <button class="btn btn-primary btn-sm" routerLink="/equipos/form/{{ equipo.id}}">Modificar</button>
+              <button class="btn btn-danger btn-sm ms-3" (click)="borrar(equipo.id!)">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div *ngIf="errorAPI" class="text-danger">
+      {{ errorMensaje }}
+    </div>
+</div>
