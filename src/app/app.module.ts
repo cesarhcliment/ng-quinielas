@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { EquiposModule } from './equipos/equipos.module';
 import { NavbarComponent } from './navbar/navbar.component';
+import { JornadasModule } from './jornadas/jornadas.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    EquiposModule
+    EquiposModule,
+    JornadasModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="text-center mt-4">
+        <h2>Jornadas</h2>
+    </div>
+
+    <form [formGroup]="formulario" (ngSubmit)="enviar()">
+        <div class="mb-3">
+          <label for="jornada" class="form-label">Número</label>
+          <input 
+            formControlName="jornada"
+            type="number" 
+            class="form-control" 
+            id="jornada">
+        </div>
+        <div *ngIf="formdata['jornada'].touched && formdata['jornada'].invalid" class="alert alert-danger">
+            <div *ngIf="formdata['jornada'].errors && formdata['jornada'].errors['required']">
+                Número de Jornada es requerido
+            </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="fecha" class="form-label">Fecha</label>
+          <input 
+            formControlName="fecha"
+            type="date" 
+            class="form-control" 
+            id="fecha">
+        </div>
+        <div *ngIf="formdata['fecha'].touched && formdata['fecha'].invalid" class="alert alert-danger">
+            <div *ngIf="formdata['fecha'].errors && formdata['fecha'].errors['required']">
+                La fecha es requerida
+            </div>
+        </div>
+        <button class="btn btn-primary btn-sm" [disabled]="!formulario.valid">Guardar</button>
+        <button class="btn btn-secondary btn-sm ms-3" type="button" routerLink="/jornadas/list">Volver</button>
+    </form>    
+    <div *ngIf="errorAPI" class="text-danger mt-3">
+        {{ errorMensaje }}
+    </div>
+</div>

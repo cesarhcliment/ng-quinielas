@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { EquiposService } from '../equipos.service';
-import { Equipo } from '../equipo';
+import { JornadasService } from '../jornadas.service';
+import { Jornada } from '../jornada';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -10,21 +10,22 @@ import Swal from 'sweetalert2';
 })
 export class ListComponent implements OnInit {
 
-  constructor(private equiposService: EquiposService) { }
+  constructor(private jornadasService: JornadasService) { }
 
-  equipos: Equipo[] = [];
+  jornadas: Jornada[] = [];
   errorAPI: boolean = false;
   errorMensaje: string = '';
 
   ngOnInit(): void {
-    this.cargarEquipos();
+    this.cargarJornadas();
   }
   
-  cargarEquipos() {
-    this.equiposService.getEquipos().subscribe({
-      next: (data: Equipo[]) => {
-        this.equipos = data;
-        this.equipos.sort( (a, b) => a.nombre.localeCompare(b.nombre));
+  cargarJornadas() {
+    this.jornadasService.getJornadas().subscribe({
+      next: (data: Jornada[]) => {
+        this.jornadas = data;
+        this.jornadas.sort( (a, b) => a.jornada - b.jornada);
+        //this.jornadas.sort( (a, b) => a.fecha.localeCompare(b.fecha));
         //console.log(this.equipos);
       },
       error: (err: any) => {
@@ -38,16 +39,16 @@ export class ListComponent implements OnInit {
   borrar(id: number) {
     Swal.fire({
       title: '¿Seguro que desea borrar?',
-      text: `El equipo ${id} será borrado`,
+      text: `La jornada ${id} será borrada`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Sí',
       cancelButtonText: 'No'
     }).then((result) => {
       if (result.value) {
-        this.equiposService.borrarEquipo(id).subscribe({
+        this.jornadasService.borrarJornada(id).subscribe({
           next: (data: any) => {
-            this.cargarEquipos();
+            this.cargarJornadas();
           },
           error: (err: any) => {
             this.errorMensaje = err;
@@ -59,4 +60,5 @@ export class ListComponent implements OnInit {
       }
     })    
   }
+
 }
