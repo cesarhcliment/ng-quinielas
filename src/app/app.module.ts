@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { EquiposModule } from './equipos/equipos.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import { JornadasModule } from './jornadas/jornadas.module';
+import { PartidosModule } from './partidos/partidos.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { JornadasModule } from './jornadas/jornadas.module';
     AppRoutingModule,
     HttpClientModule,
     EquiposModule,
-    JornadasModule
+    JornadasModule,
+    PartidosModule
   ],
   providers: [],
   bootstrap: [AppComponent]

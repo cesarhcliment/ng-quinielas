@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="text-center mt-4">
+        <h2>Partidos</h2>
+    </div>
+
+    <div *ngIf="!errorAPI">
+      <div class="d-grid">
+        <a class="btn btn-success btn-sm ms-auto" routerLink="/partidos/form">Nuevo</a>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Jornada</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Local</th>
+            <th scope="col">Visitante</th>
+            <th scope="col">Goles</th>
+            <th scope="col">Opciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let partido of partidos">
+            <th scope="row">{{ partido.id }}</th>
+            <td>{{ partido.jornada }} - {{ partido.orden }} </td>
+            <td>{{ partido.fecha | date: 'dd/MM/yyyy' }} </td>
+            <td>{{ partido.idlocal }} {{ partido.local}} </td>
+            <td>{{ partido.idvisitante }} {{ partido.visitante }} </td>
+            <td>{{ partido.goleslocal }} - {{ partido.golesvisitante }} </td>
+            <td>
+              <button class="btn btn-primary btn-sm" routerLink="/partidos/form/{{ partido.id}}">Modificar</button>
+              <button class="btn btn-danger btn-sm ms-3" (click)="borrar(partido.id!)">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div *ngIf="errorAPI" class="text-danger">
+      {{ errorMensaje }}
+    </div>
+</div>
+
